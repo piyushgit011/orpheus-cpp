@@ -1,0 +1,33 @@
+# FastAPI TTS Server Requirements
+# **requirements.txt**
+
+# Core server dependencies
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+
+# HTTP client for testing
+aiohttp>=3.9.0
+
+# Audio processing
+numpy>=2.0.0
+scipy>=1.11.0
+
+# Orpheus CPP and its dependencies
+orpheus-cpp>=0.0.3
+huggingface-hub>=0.20.0
+onnxruntime>=1.16.0
+transformers>=4.36.0
+
+# Note: wave module is built-in to Python, no need to install it
+
+# Note: llama-cpp-python needs to be installed separately based on your platform
+# 
+# For Linux/Windows (CPU):
+# pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+#
+# For MacOS with Apple Silicon (Metal):
+# pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/metal
+#
+# For CUDA GPU acceleration:
+# pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu121

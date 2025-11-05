@@ -1,0 +1,1576 @@
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+================================================================================
+🔬 COMPREHENSIVE ORPHEUS TTS BENCHMARK
+================================================================================
+Server: http://localhost:8090
+Time: 2025-11-05 23:14:43
+================================================================================
+📥 Loading SNAC vocoder model...
+✅ SNAC model loaded on cpu
+
+📊 BENCHMARK 1: Single Request Latency Analysis
+--------------------------------------------------------------------------------
+  Testing very_short (3 chars, ~10 expected tokens)... ❌ OrpheusClient.generate_speech() got an unexpected keyword argument 'save_path'
+  Testing short (30 chars, ~20 expected tokens)... ❌ OrpheusClient.generate_speech() got an unexpected keyword argument 'save_path'
+  Testing medium (81 chars, ~40 expected tokens)... ❌ OrpheusClient.generate_speech() got an unexpected keyword argument 'save_path'
+  Testing long (154 chars, ~60 expected tokens)... ❌ OrpheusClient.generate_speech() got an unexpected keyword argument 'save_path'
+  Testing very_long (300 chars, ~100 expected tokens)... ❌ OrpheusClient.generate_speech() got an unexpected keyword argument 'save_path'
+
+📊 BENCHMARK 2: Low Concurrency (2 concurrent users)
+--------------------------------------------------------------------------------
+  Running 6 requests with 2 concurrent users...
+  Sample audio will be saved to: benchmark_results/concurrency_2_users/
+
+🧪 Testing 2 concurrent requests...
+📝 Total texts: 6
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+  - Response received in 2.18s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_7381><custom_token_9937><custom_token_14006><custom_token_19701><custom_token_24453><custom_token_28075><custom_token_2...
+  - Parsed 308 valid audio token IDs
+  - Processing 44 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=44, L2=88, L3=176
+  - Generated audio shape: (90112,)
+  - Total time: 5.66s
+💾 Audio saved to: benchmark_results/concurrency_2_users/sample_2.wav
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+  - Response received in 5.67s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_4142><custom_token_10530><custom_token_12826><custom_token_17570><custom_token_23539><custom_token_27975><custom_token_...
+  - Parsed 357 valid audio token IDs
+  - Processing 51 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=51, L2=102, L3=204
+  - Generated audio shape: (104448,)
+  - Total time: 8.06s
+💾 Audio saved to: benchmark_results/concurrency_2_users/sample_1.wav
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+  - Response received in 2.39s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_8900><custom_token_12498><custom_token_18382><custom_token_20888><custom_token_28376><custom_token_98...
+  - Parsed 441 valid audio token IDs
+  - Processing 63 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=63, L2=126, L3=252
+  - Generated audio shape: (129024,)
+  - Total time: 2.78s
+💾 Audio saved to: benchmark_results/concurrency_2_users/sample_3.wav
+Error during TTS generation: Server disconnected
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+  - Response received in 2.41s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_11788><custom_token_12841><custom_token_16859><custom_token_23357><custom_token_26839><custom_token_2...
+  - Parsed 329 valid audio token IDs
+  - Processing 47 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=47, L2=94, L3=188
+  - Generated audio shape: (96256,)
+  - Total time: 3.50s
+  - Response received in 3.50s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_6787><custom_token_11691><custom_token_14967><custom_token_18005><custom_token_23004><custom_token_27100><custom_token_...
+  - Parsed 378 valid audio token IDs
+  - Processing 54 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=54, L2=108, L3=216
+  - Generated audio shape: (110592,)
+  - Total time: 3.71s
+  ✅ Success rate: 6/6
+  ⏱️  Total time: 12.16s
+  🚀 Throughput: 0.49 req/s
+  📊 Latency: min=394ms, max=8057ms, mean=4019ms, median=3713ms
+  📈 Concurrency efficiency: 0.49 completions/sec
+
+📊 BENCHMARK 3: Medium Concurrency (5 concurrent users)
+--------------------------------------------------------------------------------
+  Running 10 requests with 5 concurrent users...
+  Sample audio will be saved to: benchmark_results/concurrency_5_users/
+
+🧪 Testing 5 concurrent requests...
+📝 Total texts: 10
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+  - Response received in 2.72s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_9218><custom_token_12343><custom_token_18382><custom_token_20760><custom_token_27764><custom_token_20...
+  - Parsed 266 valid audio token IDs
+  - Processing 38 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=38, L2=76, L3=152
+  - Generated audio shape: (77824,)
+  - Total time: 6.86s
+💾 Audio saved to: benchmark_results/concurrency_5_users/sample_1.wav
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+  - Response received in 6.86s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_4149><custom_token_9777><custom_token_15705><custom_token_20327><custom_token_20843><custom_token_26102><custom_token_2...
+  - Parsed 308 valid audio token IDs
+  - Processing 44 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=44, L2=88, L3=176
+  - Generated audio shape: (90112,)
+  - Total time: 9.18s
+💾 Audio saved to: benchmark_results/concurrency_5_users/sample_3.wav
+  - Response received in 9.18s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_9218><custom_token_15706><custom_token_18382><custom_token_20709><custom_token_26321><custom_token_98...
+  - Parsed 336 valid audio token IDs
+  - Processing 48 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=48, L2=96, L3=192
+  - Generated audio shape: (98304,)
+  - Total time: 9.38s
+  - Response received in 9.38s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_3772><custom_token_4137><custom_token_8731><custom_token_13190><custom_token_18382><custom_token_24324><custom_token_25103><custom_token_9...
+  - Parsed 441 valid audio token IDs
+  - Processing 63 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=63, L2=126, L3=252
+  - Generated audio shape: (129024,)
+  - Total time: 9.73s
+💾 Audio saved to: benchmark_results/concurrency_5_users/sample_2.wav
+  - Response received in 9.73s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_4149><custom_token_11691><custom_token_12343><custom_token_16437><custom_token_24324><custom_token_26311><custom_token_...Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+
+  - Parsed 301 valid audio token IDs
+  - Processing 43 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=43, L2=86, L3=172
+  - Generated audio shape: (88064,)
+  - Total time: 10.00s
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+  - Response received in 3.14s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_987><custom_token_4149><custom_token_10484><custom_token_15706><custom_token_16437><custom_token_23879><custom_token_25889><custom_token_3...
+  - Parsed 399 valid audio token IDs
+  - Processing 57 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=57, L2=114, L3=228
+  - Generated audio shape: (116736,)
+  - Total time: 3.69s
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+  ✅ Success rate: 10/10
+  ⏱️  Total time: 10.56s
+  🚀 Throughput: 0.95 req/s
+  📊 Latency: min=552ms, max=10003ms, mean=5105ms, median=6864ms
+  📈 Concurrency efficiency: 0.95 completions/sec
+
+📊 BENCHMARK 4: High Concurrency (10 concurrent users)
+--------------------------------------------------------------------------------
+  Running 20 requests with 10 concurrent users...
+  Sample audio will be saved to: benchmark_results/concurrency_10_users/
+
+🧪 Testing 10 concurrent requests...
+📝 Total texts: 20
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+  - Response received in 2.76s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_6982><custom_token_9777><custom_token_15705><custom_token_16430><custom_token_23879><custom_token_28549><custom_token_3...
+  - Parsed 266 valid audio token IDs
+  - Processing 38 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=38, L2=76, L3=152
+  - Generated audio shape: (77824,)
+  - Total time: 8.23s
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+  - Response received in 8.23s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_5881><custom_token_9777><custom_token_16044><custom_token_18382><custom_token_21936><custom_token_27764><custom_token_20...
+  - Parsed 301 valid audio token IDs
+  - Processing 43 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=43, L2=86, L3=172
+  - Generated audio shape: (88064,)
+  - Total time: 9.08s
+💾 Audio saved to: benchmark_results/concurrency_10_users/sample_3.wav
+  - Response received in 9.08s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_6841><custom_token_11573><custom_token_13539><custom_token_16437><custom_token_23879><custom_token_25889><custom_token_...
+  - Parsed 329 valid audio token IDs
+  - Processing 47 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=47, L2=94, L3=188
+  - Generated audio shape: (96256,)
+  - Total time: 9.28s
+  - Response received in 9.28s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_9218><custom_token_15347><custom_token_18382><custom_token_23287><custom_token_27764><custom_token_20...
+  - Parsed 364 valid audio token IDs
+  - Processing 52 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=52, L2=104, L3=208
+  - Generated audio shape: (106496,)
+  - Total time: 9.42s
+💾 Audio saved to: benchmark_results/concurrency_10_users/sample_1.wav
+  - Response received in 9.42s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_987><custom_token_6787><custom_token_9937><custom_token_15244><custom_token_19075><custom_token_21921><custom_token_26321><custom_token_95...
+  - Parsed 301 valid audio token IDs
+  - Processing 43 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=43, L2=86, L3=172
+  - Generated audio shape: (88064,)
+  - Total time: 9.80s
+  - Response received in 9.80s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2788><custom_token_4571><custom_token_8417><custom_token_14551><custom_token_16859><custom_token_23749><custom_token_24845><custom_token_9...
+  - Parsed 280 valid audio token IDs
+  - Processing 40 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=40, L2=80, L3=160
+  - Generated audio shape: (81920,)
+  - Total time: 10.04s
+  - Response received in 10.04s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_4849><custom_token_9218><custom_token_16063><custom_token_17324><custom_token_22657><custom_token_27635><custom_token_9...
+  - Parsed 378 valid audio token IDs
+  - Processing 54 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=54, L2=108, L3=216
+  - Generated audio shape: (110592,)
+  - Total time: 10.12s
+  - Response received in 10.12s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_9218><custom_token_15252><custom_token_18382><custom_token_21936><custom_token_24805><custom_token_20...
+  - Parsed 350 valid audio token IDs
+  - Processing 50 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=50, L2=100, L3=200
+  - Generated audio shape: (102400,)
+  - Total time: 10.38s
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Error during TTS generation: Server disconnected
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+  - Response received in 10.38s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_11251><custom_token_15095><custom_token_18382><custom_token_22657><custom_token_25169><custom_token_2...Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+
+  - Parsed 350 valid audio token IDs
+  - Processing 50 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=50, L2=100, L3=200
+  - Generated audio shape: (102400,)
+  - Total time: 13.12s
+  - Response received in 13.12s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_9777><custom_token_15149><custom_token_19741><custom_token_23357><custom_token_27453><custom_token_20...
+  - Parsed 343 valid audio token IDs
+  - Processing 49 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=49, L2=98, L3=196
+  - Generated audio shape: (100352,)
+  - Total time: 13.81s
+💾 Audio saved to: benchmark_results/concurrency_10_users/sample_2.wav
+Error during TTS generation: Server disconnected
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Error during TTS generation: Server disconnected
+  - Response received in 3.43s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_5865><custom_token_9777><custom_token_12998><custom_token_19075><custom_token_24324><custom_token_28278><custom_token_9...
+  - Parsed 301 valid audio token IDs
+  - Processing 43 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=43, L2=86, L3=172
+  - Generated audio shape: (88064,)
+  - Total time: 3.65s
+  - Response received in 3.65s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_965><custom_token_4142><custom_token_11251><custom_token_14551><custom_token_16437><custom_token_20709><custom_token_26321><custom_token_2...
+  - Parsed 322 valid audio token IDs
+  - Processing 46 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=46, L2=92, L3=184
+  - Generated audio shape: (94208,)
+  - Total time: 5.40s
+  - Response received in 5.40s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_10793><custom_token_14305><custom_token_18382><custom_token_22743><custom_token_28399><custom_token_2...
+  - Parsed 322 valid audio token IDs
+  - Processing 46 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=46, L2=92, L3=184
+  - Generated audio shape: (94208,)
+  - Total time: 5.49s
+  - Response received in 5.49s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_6787><custom_token_9777><custom_token_13744><custom_token_19075><custom_token_23004><custom_token_25889><custom_token_9...
+  - Parsed 315 valid audio token IDs
+  - Processing 45 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=45, L2=90, L3=180
+  - Generated audio shape: (92160,)
+  - Total time: 5.75s
+Error during TTS generation: Server disconnected
+  - Response received in 8.18s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_6787><custom_token_11691><custom_token_13190><custom_token_19552><custom_token_22743><custom_token_25856><custom_token_...
+  - Parsed 329 valid audio token IDs
+  - Processing 47 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=47, L2=94, L3=188
+  - Generated audio shape: (96256,)
+  - Total time: 11.11s
+  - Response received in 11.11s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_6787><custom_token_9777><custom_token_13744><custom_token_18382><custom_token_20718><custom_token_25889><custom_token_2...
+  - Parsed 336 valid audio token IDs
+  - Processing 48 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=48, L2=96, L3=192
+  - Generated audio shape: (98304,)
+  - Total time: 11.43s
+  ✅ Success rate: 20/20
+  ⏱️  Total time: 21.81s
+  🚀 Throughput: 0.92 req/s
+  📊 Latency: min=2151ms, max=13811ms, mean=7872ms, median=9277ms
+  📈 Concurrency efficiency: 0.92 completions/sec
+
+📊 BENCHMARK 5: Stress Test (15 concurrent users)
+--------------------------------------------------------------------------------
+  Running 30 requests with 15 concurrent users...
+  Sample audio will be saved to: benchmark_results/concurrency_15_users/
+
+🧪 Testing 15 concurrent requests...
+📝 Total texts: 30
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+  - Response received in 2.87s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_6787><custom_token_9777><custom_token_15790><custom_token_19270><custom_token_23879><custom_token_27228><custom_token_9...
+  - Parsed 280 valid audio token IDs
+  - Processing 40 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=40, L2=80, L3=160
+  - Generated audio shape: (81920,)
+  - Total time: 5.41s
+💾 Audio saved to: benchmark_results/concurrency_15_users/sample_2.wav
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+  - Response received in 5.41s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_6787><custom_token_10266><custom_token_12569><custom_token_19075><custom_token_23602><custom_token_25031><custom_token_...
+  - Parsed 287 valid audio token IDs
+  - Processing 41 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=41, L2=82, L3=164
+  - Generated audio shape: (83968,)
+  - Total time: 8.28s
+💾 Audio saved to: benchmark_results/concurrency_15_users/sample_1.wav
+  - Response received in 8.28s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_9218><custom_token_14866><custom_token_18382><custom_token_22456><custom_token_26914><custom_token_20...
+  - Parsed 378 valid audio token IDs
+  - Processing 54 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=54, L2=108, L3=216
+  - Generated audio shape: (110592,)
+  - Total time: 12.85s
+  - Response received in 12.85s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_6787><custom_token_11691><custom_token_15410><custom_token_19270><custom_token_23879><custom_token_27228><custom_token_...
+  - Parsed 413 valid audio token IDs
+  - Processing 59 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=59, L2=118, L3=236
+  - Generated audio shape: (120832,)
+  - Total time: 13.40s
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completionTraceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+  - Response received in 13.41s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_10484><custom_token_13744><custom_token_16859><custom_token_23357><custom_token_25706><custom_token_9...
+  - Parsed 336 valid audio token IDs
+  - Processing 48 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=48, L2=96, L3=192
+  - Generated audio shape: (98304,)
+  - Total time: 13.68s
+  - Response received in 13.68s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_987><custom_token_4149><custom_token_8613><custom_token_14580><custom_token_16437><custom_token_24255><custom_token_28476><custom_token_32...
+  - Parsed 280 valid audio token IDs
+  - Processing 40 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=40, L2=80, L3=160
+  - Generated audio shape: (81920,)
+  - Total time: 13.74s
+  - Response received in 13.74s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_8560><custom_token_15830><custom_token_19235><custom_token_21085><custom_token_25499><custom_token_20...
+  - Parsed 350 valid audio token IDs
+  - Processing 50 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=50, L2=100, L3=200
+  - Generated audio shape: (102400,)
+  - Total time: 14.03s
+  - Response received in 14.03s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_4149><custom_token_9777><custom_token_14200><custom_token_19075><custom_token_24182><custom_token_28278><custom_token_2...
+  - Parsed 336 valid audio token IDs
+  - Processing 48 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=48, L2=96, L3=192
+  - Generated audio shape: (98304,)
+  - Total time: 14.10s
+  - Response received in 14.10s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2967><custom_token_6615><custom_token_10447><custom_token_13732><custom_token_18169><custom_token_20709><custom_token_24631><custom_token_...
+  - Parsed 322 valid audio token IDs
+  - Processing 46 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=46, L2=92, L3=184
+  - Generated audio shape: (94208,)
+  - Total time: 14.36s
+  - Response received in 14.37s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_4142><custom_token_8864><custom_token_15526><custom_token_19270><custom_token_21936><custom_token_27764><custom_token_9...
+  - Parsed 336 valid audio token IDs
+  - Processing 48 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=48, L2=96, L3=192
+  - Generated audio shape: (98304,)
+  - Total time: 14.47s
+  - Response received in 14.47s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_10484><custom_token_15189><custom_token_18382><custom_token_20888><custom_token_28075><custom_token_9...
+  - Parsed 343 valid audio token IDs
+  - Processing 49 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=49, L2=98, L3=196
+  - Generated audio shape: (100352,)
+  - Total time: 14.81s
+  - Response received in 14.81s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_4149><custom_token_10484><custom_token_14392><custom_token_16437><custom_token_22584><custom_token_28662><custom_token_...
+  - Parsed 287 valid audio token IDs
+  - Processing 41 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=41, L2=82, L3=164
+  - Generated audio shape: (83968,)
+  - Total time: 15.02s
+💾 Audio saved to: benchmark_results/concurrency_15_users/sample_3.wav
+  - Response received in 15.02s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_7279><custom_token_9777><custom_token_12841><custom_token_16437><custom_token_23879><custom_token_27228><custom_token_9...
+  - Parsed 266 valid audio token IDs
+  - Processing 38 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=38, L2=76, L3=152
+  - Generated audio shape: (77824,)
+  - Total time: 15.09s
+  - Response received in 15.09s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_3202><custom_token_6094><custom_token_11691><custom_token_12515><custom_token_19075><custom_token_23004><custom_token_25362><custom_token_...
+  - Parsed 357 valid audio token IDs
+  - Processing 51 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=51, L2=102, L3=204
+  - Generated audio shape: (104448,)
+  - Total time: 15.17s
+  - Response received in 15.17s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_9777><custom_token_14200><custom_token_18382><custom_token_21921><custom_token_26839><custom_token_20...
+  - Parsed 399 valid audio token IDs
+  - Processing 57 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=57, L2=114, L3=228
+  - Generated audio shape: (116736,)
+  - Total time: 15.50s
+  - Response received in 10.09s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_7264><custom_token_10087><custom_token_15687><custom_token_19552><custom_token_20761><custom_token_26488><custom_token_...
+  - Parsed 315 valid audio token IDs
+  - Processing 45 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=45, L2=90, L3=180
+  - Generated audio shape: (92160,)
+  - Total time: 10.64s
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+  - Response received in 2.99s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_5865><custom_token_11691><custom_token_14967><custom_token_19225><custom_token_24346><custom_token_27764><custom_token_...
+  - Parsed 315 valid audio token IDs
+  - Processing 45 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=45, L2=90, L3=180
+  - Generated audio shape: (92160,)
+  - Total time: 5.92s
+  - Response received in 5.92s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_1999><custom_token_4142><custom_token_10940><custom_token_15218><custom_token_19270><custom_token_23539><custom_token_25351><custom_token_...
+  - Parsed 308 valid audio token IDs
+  - Processing 44 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=44, L2=88, L3=176
+  - Generated audio shape: (90112,)
+  - Total time: 9.10s
+  - Response received in 9.10s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_4142><custom_token_10484><custom_token_16176><custom_token_17324><custom_token_24280><custom_token_26246><custom_token_...
+  - Parsed 343 valid audio token IDs
+  - Processing 49 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=49, L2=98, L3=196
+  - Generated audio shape: (100352,)
+  - Total time: 9.35s
+  - Response received in 9.35s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_987><custom_token_6787><custom_token_8417><custom_token_15393><custom_token_16437><custom_token_24283><custom_token_27177><custom_token_20...
+  - Parsed 357 valid audio token IDs
+  - Processing 51 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=51, L2=102, L3=204
+  - Generated audio shape: (104448,)
+  - Total time: 9.66s
+  - Response received in 9.66s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_3202><custom_token_4571><custom_token_9453><custom_token_13643><custom_token_16859><custom_token_23749><custom_token_26032><custom_token_9...
+  - Parsed 322 valid audio token IDs
+  - Processing 46 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=46, L2=92, L3=184
+  - Generated audio shape: (94208,)
+  - Total time: 9.78s
+  - Response received in 9.78s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_8613><custom_token_15347><custom_token_18382><custom_token_21033><custom_token_26017><custom_token_26...
+  - Parsed 343 valid audio token IDs
+  - Processing 49 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=49, L2=98, L3=196
+  - Generated audio shape: (100352,)
+  - Total time: 10.10s
+  - Response received in 10.10s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_6787><custom_token_9777><custom_token_12998><custom_token_19075><custom_token_23879><custom_token_24805><custom_token_2...
+  - Parsed 329 valid audio token IDs
+  - Processing 47 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=47, L2=94, L3=188
+  - Generated audio shape: (96256,)
+  - Total time: 10.37s
+  ✅ Success rate: 30/30
+  ⏱️  Total time: 26.43s
+  🚀 Throughput: 1.14 req/s
+  📊 Latency: min=4ms, max=15500ms, mean=9427ms, median=10368ms
+  📈 Concurrency efficiency: 1.14 completions/sec
+
+📊 BENCHMARK 6: Maximum Stress (20 concurrent users)
+--------------------------------------------------------------------------------
+  Running 40 requests with 20 concurrent users...
+  Sample audio will be saved to: benchmark_results/concurrency_20_users/
+
+🧪 Testing 20 concurrent requests...
+📝 Total texts: 40
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+  - Response received in 3.17s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_9218><custom_token_15706><custom_token_18382><custom_token_20888><custom_token_24631><custom_token_20...
+  - Parsed 336 valid audio token IDs
+  - Processing 48 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=48, L2=96, L3=192
+  - Generated audio shape: (98304,)
+  - Total time: 5.89s
+💾 Audio saved to: benchmark_results/concurrency_20_users/sample_3.wav
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+  - Response received in 5.89s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_10484><custom_token_12651><custom_token_18382><custom_token_23381><custom_token_24805><custom_token_2...
+  - Parsed 343 valid audio token IDs
+  - Processing 49 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=49, L2=98, L3=196
+  - Generated audio shape: (100352,)
+  - Total time: 8.74s
+💾 Audio saved to: benchmark_results/concurrency_20_users/sample_2.wav
+  - Response received in 8.74s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_5881><custom_token_9777><custom_token_14521><custom_token_18382><custom_token_21902><custom_token_24669><custom_token_20...
+  - Parsed 350 valid audio token IDs
+  - Processing 50 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=50, L2=100, L3=200
+  - Generated audio shape: (102400,)
+  - Total time: 12.48s
+💾 Audio saved to: benchmark_results/concurrency_20_users/sample_1.wav
+  - Response received in 12.48s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_7279><custom_token_10793><custom_token_15705><custom_token_17578><custom_token_24324><custom_token_25889><custom_token_...
+  - Parsed 350 valid audio token IDs
+  - Processing 50 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=50, L2=100, L3=200
+  - Generated audio shape: (102400,)
+  - Total time: 15.24s
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+  - Response received in 15.24s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_11573><custom_token_12841><custom_token_18382><custom_token_20888><custom_token_24805><custom_token_2...
+  - Parsed 294 valid audio token IDs
+  - Processing 42 groups of 7 codes for SNAC...Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+
+  - Final SNAC layer sizes: L1=42, L2=84, L3=168
+  - Generated audio shape: (86016,)
+  - Total time: 17.49s
+  - Response received in 17.49s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_965><custom_token_4142><custom_token_10484><custom_token_15778><custom_token_16437><custom_token_22743><custom_token_24646><custom_token_9...
+  - Parsed 308 valid audio token IDs
+  - Processing 44 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=44, L2=88, L3=176
+  - Generated audio shape: (90112,)
+  - Total time: 17.58s
+  - Response received in 17.58s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_5881><custom_token_9218><custom_token_14521><custom_token_18382><custom_token_23539><custom_token_25827><custom_token_20...
+  - Parsed 350 valid audio token IDs
+  - Processing 50 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=50, L2=100, L3=200
+  - Generated audio shape: (102400,)
+  - Total time: 17.86s
+  - Response received in 17.86s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2967><custom_token_6094><custom_token_9862><custom_token_15095><custom_token_18169><custom_token_21921><custom_token_24805><custom_token_2...
+  - Parsed 364 valid audio token IDs
+  - Processing 52 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=52, L2=104, L3=208
+  - Generated audio shape: (106496,)
+  - Total time: 17.94s
+  - Response received in 17.94s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2967><custom_token_7065><custom_token_11788><custom_token_14211><custom_token_16859><custom_token_23357><custom_token_27453><custom_token_...
+  - Parsed 287 valid audio token IDs
+  - Processing 41 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=41, L2=82, L3=164
+  - Generated audio shape: (83968,)
+  - Total time: 18.01s
+  - Response received in 18.01s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_4142><custom_token_10484><custom_token_15687><custom_token_17588><custom_token_23845><custom_token_28317><custom_token_...
+  - Parsed 343 valid audio token IDs
+  - Processing 49 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=49, L2=98, L3=196
+  - Generated audio shape: (100352,)
+  - Total time: 18.21s
+  - Response received in 18.21s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_11573><custom_token_15706><custom_token_18382><custom_token_24324><custom_token_25889><custom_token_2...
+  - Parsed 329 valid audio token IDs
+  - Processing 47 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=47, L2=94, L3=188
+  - Generated audio shape: (96256,)
+  - Total time: 18.28s
+  - Response received in 18.28s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_1081><custom_token_5300><custom_token_10447><custom_token_14566><custom_token_17588><custom_token_23444><custom_token_24984><custom_token_...
+  - Parsed 343 valid audio token IDs
+  - Processing 49 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=49, L2=98, L3=196
+  - Generated audio shape: (100352,)
+  - Total time: 18.35s
+  - Response received in 18.36s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_9777><custom_token_13484><custom_token_18382><custom_token_23879><custom_token_26400><custom_token_27...
+  - Parsed 315 valid audio token IDs
+  - Processing 45 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=45, L2=90, L3=180
+  - Generated audio shape: (92160,)
+  - Total time: 18.59s
+  - Response received in 18.59s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_4142><custom_token_10793><custom_token_13539><custom_token_17050><custom_token_24453><custom_token_25286><custom_token_...
+  - Parsed 315 valid audio token IDs
+  - Processing 45 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=45, L2=90, L3=180
+  - Generated audio shape: (92160,)
+  - Total time: 18.66s
+  - Response received in 18.66s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_8864><custom_token_12841><custom_token_18382><custom_token_20888><custom_token_28420><custom_token_20...
+  - Parsed 294 valid audio token IDs
+  - Processing 42 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=42, L2=84, L3=168
+  - Generated audio shape: (86016,)
+  - Total time: 18.88s
+  - Response received in 18.88s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_1081><custom_token_4142><custom_token_9777><custom_token_15687><custom_token_17588><custom_token_21902><custom_token_28317><custom_token_9...
+  - Parsed 364 valid audio token IDs
+  - Processing 52 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=52, L2=104, L3=208
+  - Generated audio shape: (106496,)
+  - Total time: 18.95s
+  - Response received in 18.95s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_6787><custom_token_11691><custom_token_16023><custom_token_20327><custom_token_23879><custom_token_24805><custom_token_...
+  - Parsed 336 valid audio token IDs
+  - Processing 48 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=48, L2=96, L3=192
+  - Generated audio shape: (98304,)
+  - Total time: 19.03s
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Hello, testing concurrent Orpheus requests....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'This is a concurrency benchmark test for TTS....'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Measuring system performance under concurrent load...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'How well does Orpheus handle multiple simultaneous...'
+  - Sending to http://localhost:8090/completion
+Generating speech for: 'Streaming audio generation with SNAC decoding unde...'
+  - Sending to http://localhost:8090/completion
+  - Response received in 19.03s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2967><custom_token_5881><custom_token_9218><custom_token_12343><custom_token_16859><custom_token_24070><custom_token_27453><custom_token_9...
+  - Parsed 357 valid audio token IDs
+  - Processing 51 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=51, L2=102, L3=204
+  - Generated audio shape: (104448,)
+  - Total time: 21.29s
+  - Response received in 21.29s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_6787><custom_token_11691><custom_token_13744><custom_token_17570><custom_token_23132><custom_token_28075><custom_token_...Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+Traceback (most recent call last):
+  File "/mnt/projects/orpheus-cpp/orpheus_client_fixed.py", line 186, in generate_speech
+    async with self.session.post(
+               ~~~~~~~~~~~~~~~~~^
+        f"{self.server_url}/completion",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        json=payload,
+        ^^^^^^^^^^^^^
+        headers={"Content-Type": "application/json"}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as response:
+    ^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client.py", line 757, in _connect_and_send_request
+    await resp.start(conn)
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/client_reqrep.py", line 539, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.13/site-packages/aiohttp/streams.py", line 680, in read
+    await self._waiter
+aiohttp.client_exceptions.ServerDisconnectedError: Server disconnected
+
+  - Parsed 406 valid audio token IDs
+  - Processing 58 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=58, L2=116, L3=232
+  - Generated audio shape: (118784,)
+  - Total time: 21.61s
+  - Response received in 21.61s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_4142><custom_token_11430><custom_token_15082><custom_token_19270><custom_token_22059><custom_token_28278><custom_token_...
+  - Parsed 371 valid audio token IDs
+  - Processing 53 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=53, L2=106, L3=212
+  - Generated audio shape: (108544,)
+  - Total time: 22.23s
+  - Response received in 16.34s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_987><custom_token_6787><custom_token_10793><custom_token_14033><custom_token_16496><custom_token_24276><custom_token_28549><custom_token_2...
+  - Parsed 315 valid audio token IDs
+  - Processing 45 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=45, L2=90, L3=180
+  - Generated audio shape: (92160,)
+  - Total time: 17.18s
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+Error during TTS generation: Server disconnected
+  - Response received in 4.04s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_9777><custom_token_14200><custom_token_18382><custom_token_23239><custom_token_26311><custom_token_27...
+  - Parsed 322 valid audio token IDs
+  - Processing 46 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=46, L2=92, L3=184
+  - Generated audio shape: (94208,)
+  - Total time: 4.12s
+  - Response received in 7.26s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_4142><custom_token_12137><custom_token_14940><custom_token_19270><custom_token_22059><custom_token_27228><custom_token_...
+  - Parsed 329 valid audio token IDs
+  - Processing 47 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=47, L2=94, L3=188
+  - Generated audio shape: (96256,)
+  - Total time: 10.00s
+  - Response received in 10.00s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_11573><custom_token_13539><custom_token_18382><custom_token_20888><custom_token_25664><custom_token_2...
+  - Parsed 329 valid audio token IDs
+  - Processing 47 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=47, L2=94, L3=188
+  - Generated audio shape: (96256,)
+  - Total time: 12.73s
+  - Response received in 12.73s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_1081><custom_token_4142><custom_token_10484><custom_token_15687><custom_token_17588><custom_token_23104><custom_token_26955><custom_token_...
+  - Parsed 329 valid audio token IDs
+  - Processing 47 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=47, L2=94, L3=188
+  - Generated audio shape: (96256,)
+  - Total time: 13.43s
+  - Response received in 13.43s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_987><custom_token_6787><custom_token_9937><custom_token_12497><custom_token_19075><custom_token_22743><custom_token_26321><custom_token_95...
+  - Parsed 350 valid audio token IDs
+  - Processing 50 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=50, L2=100, L3=200
+  - Generated audio shape: (102400,)
+  - Total time: 13.51s
+  - Response received in 13.51s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_10793><custom_token_15778><custom_token_18169><custom_token_23879><custom_token_26308><custom_token_2...
+  - Parsed 308 valid audio token IDs
+  - Processing 44 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=44, L2=88, L3=176
+  - Generated audio shape: (90112,)
+  - Total time: 13.76s
+  - Response received in 13.76s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_8613><custom_token_15347><custom_token_18382><custom_token_21033><custom_token_26839><custom_token_20...
+  - Parsed 322 valid audio token IDs
+  - Processing 46 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=46, L2=92, L3=184
+  - Generated audio shape: (94208,)
+  - Total time: 13.85s
+  - Response received in 13.84s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2622><custom_token_4142><custom_token_10484><custom_token_13744><custom_token_16437><custom_token_23879><custom_token_26071><custom_token_...
+  - Parsed 329 valid audio token IDs
+  - Processing 47 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=47, L2=94, L3=188
+  - Generated audio shape: (96256,)
+  - Total time: 13.92s
+  - Response received in 13.92s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_958><custom_token_6094><custom_token_9218><custom_token_15095><custom_token_18382><custom_token_24324><custom_token_25602><custom_token_20...
+  - Parsed 336 valid audio token IDs
+  - Processing 48 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=48, L2=96, L3=192
+  - Generated audio shape: (98304,)
+  - Total time: 15.09s
+  - Response received in 15.09s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2061><custom_token_4142><custom_token_11573><custom_token_14771><custom_token_19270><custom_token_24566><custom_token_26488><custom_token_...
+  - Parsed 315 valid audio token IDs
+  - Processing 45 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=45, L2=90, L3=180
+  - Generated audio shape: (92160,)
+  - Total time: 15.62s
+  - Response received in 15.61s
+  - Raw response: <custom_token_4><custom_token_5><custom_token_1><custom_token_2967><custom_token_5881><custom_token_9218><custom_token_12998><custom_token_18169><custom_token_23381><custom_token_24805><custom_token_1...
+  - Parsed 336 valid audio token IDs
+  - Processing 48 groups of 7 codes for SNAC...
+  - Final SNAC layer sizes: L1=48, L2=96, L3=192
+  - Generated audio shape: (98304,)
+  - Total time: 15.86s
+  ✅ Success rate: 40/40
+  ⏱️  Total time: 34.90s
+  🚀 Throughput: 1.15 req/s
+  📊 Latency: min=3786ms, max=22225ms, mean=13399ms, median=15242ms
+  📈 Concurrency efficiency: 1.15 completions/sec
+
+================================================================================
+📋 COMPREHENSIVE BENCHMARK SUMMARY
+================================================================================
+
+🔀 Concurrency Performance:
+
+   2 Users:
+      Success Rate: 6/6
+      Throughput: 0.49 req/s
+      Latency: min=394ms, avg=4019ms, max=8057ms
+      Efficiency: 0.49 completions/sec
+
+   5 Users:
+      Success Rate: 10/10
+      Throughput: 0.95 req/s
+      Latency: min=552ms, avg=5105ms, max=10003ms
+      Efficiency: 0.95 completions/sec
+
+   10 Users:
+      Success Rate: 20/20
+      Throughput: 0.92 req/s
+      Latency: min=2151ms, avg=7872ms, max=13811ms
+      Efficiency: 0.92 completions/sec
+
+   15 Users:
+      Success Rate: 30/30
+      Throughput: 1.14 req/s
+      Latency: min=4ms, avg=9427ms, max=15500ms
+      Efficiency: 1.14 completions/sec
+
+   20 Users:
+      Success Rate: 40/40
+      Throughput: 1.15 req/s
+      Latency: min=3786ms, avg=13399ms, max=22225ms
+      Efficiency: 1.15 completions/sec
+
+================================================================================
+💡 Interpretation:
+   - RTF (Realtime Factor): Time to generate / Audio duration
+     RTF < 1.0 means faster than realtime (good for streaming)
+   - Lower latency and higher throughput are better
+   - Watch for latency increases at higher concurrency
+================================================================================
+
+💾 Results saved to: benchmark_results/benchmark_20251105_231631.json

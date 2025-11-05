@@ -79,6 +79,14 @@ async for sample_rate, samples in orpheus.stream_tts(text, options={"voice_id": 
     write("output.wav", sample_rate, samples.squeeze())
 ``` 
 
-## License
+# optional: deps if missing
+sudo apt-get update && sudo apt-get install -y cmake build-essential ninja-build libcurl4-openssl-dev
 
-`orpheus-cpp` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+# wipe any old cache that may contain LLAMA_CUBLAS settings
+rm -rf build
+
+# configure for CUDA on Ada (compute capability 8.9)
+cmake -B build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES="89" -DCMAKE_BUILD_TYPE=Release
+
+# build all tools / server
+cmake --build build --config Release -j 16

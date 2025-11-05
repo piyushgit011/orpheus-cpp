@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "server_url": "http://localhost:8090",
+    "timestamp": "2025-11-05 23:14:43",
+    "test_name": "comprehensive_orpheus_benchmark"
+  },
+  "tests": {
+    "single_request": {
+      "test_count": 5,
+      "successful": 0,
+      "failed": 5
+    },
+    "concurrency_2": {
+      "test_type": "concurrent",
+      "concurrent_users": 2,
+      "total_requests": 6,
+      "successful_requests": 6,
+      "failed_requests": 0,
+      "total_test_time_seconds": 12.164587020874023,
+      "requests_per_second": 0.4932349934859442,
+      "latency_stats": {
+        "min_ms": 394.1771984100342,
+        "max_ms": 8057.239770889282,
+        "mean_ms": 4018.722414970398,
+        "median_ms": 3712.569236755371
+      }
+    },
+    "concurrency_5": {
+      "test_type": "concurrent",
+      "concurrent_users": 5,
+      "total_requests": 10,
+      "successful_requests": 10,
+      "failed_requests": 0,
+      "total_test_time_seconds": 10.55723237991333,
+      "requests_per_second": 0.9472179488088616,
+      "latency_stats": {
+        "min_ms": 552.053689956665,
+        "max_ms": 10002.662658691406,
+        "mean_ms": 5105.380177497864,
+        "median_ms": 6864.497661590576
+      }
+    },
+    "concurrency_10": {
+      "test_type": "concurrent",
+      "concurrent_users": 10,
+      "total_requests": 20,
+      "successful_requests": 20,
+      "failed_requests": 0,
+      "total_test_time_seconds": 21.81277108192444,
+      "requests_per_second": 0.9168940491276404,
+      "latency_stats": {
+        "min_ms": 2151.0167121887207,
+        "max_ms": 13810.880899429321,
+        "mean_ms": 7872.133088111877,
+        "median_ms": 9277.360200881958
+      }
+    },
+    "concurrency_15": {
+      "test_type": "concurrent",
+      "concurrent_users": 15,
+      "total_requests": 30,
+      "successful_requests": 30,
+      "failed_requests": 0,
+      "total_test_time_seconds": 26.42688536643982,
+      "requests_per_second": 1.1352075579098615,
+      "latency_stats": {
+        "min_ms": 4.137754440307617,
+        "max_ms": 15500.349998474121,
+        "mean_ms": 9427.305889129639,
+        "median_ms": 10367.619514465332
+      }
+    },
+    "concurrency_20": {
+      "test_type": "concurrent",
+      "concurrent_users": 20,
+      "total_requests": 40,
+      "successful_requests": 40,
+      "failed_requests": 0,
+      "total_test_time_seconds": 34.89811825752258,
+      "requests_per_second": 1.1461936057649087,
+      "latency_stats": {
+        "min_ms": 3786.1475944519043,
+        "max_ms": 22225.225687026978,
+        "mean_ms": 13398.659324645996,
+        "median_ms": 15242.40231513977
+      }
+    }
+  }
+}
